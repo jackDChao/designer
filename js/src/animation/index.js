@@ -13,8 +13,8 @@ import {
     TweenLite,
     TimelineMax,
     TimelineLite
-} from '/js/lib/greensock-js/src/esm/index.js'
-import waterDrop from '/js/src//animation/waterDrop.js'
+} from '../../lib/greensock-js/src/esm/index.js'
+import waterDrop from '../../src//animation/waterDrop.js'
 
 class animation {
     constructor(cb) {
