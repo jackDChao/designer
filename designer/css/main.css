@@ -1,0 +1,559 @@
+html,body,.main-container{
+    width: 100%;
+    height: 100%;
+}
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/  
+::-webkit-scrollbar  
+{  
+    width: 10px;  /*滚动条宽度*/
+    height: 10px;  /*滚动条高度*/
+}  
+  
+/*定义滚动条轨道 内阴影+圆角*/  
+::-webkit-scrollbar-track  
+{  
+    border-radius: 10px;  /*滚动条的背景区域的圆角*/
+    background-color: #fff;/*滚动条的背景颜色*/  
+}  
+  
+/*定义滑块 内阴影+圆角*/  
+::-webkit-scrollbar-thumb  
+{  
+    border-radius: 10px;  /*滚动条的圆角*/
+    background-color: #D8D8D8;  /*滚动条的背景颜色*/
+}
+.logo{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 80px;
+    height: 56px;
+    background: url("../images/icons/robot.svg") center no-repeat;
+}
+/* .moveItem:hover{
+    border: 1px dashed #ddd;
+} */
+.timeLineS{
+    position: absolute;
+    left: 100px;
+    width: 2px;
+    top: 0px;
+    background: #F6582A;
+    height: 100px;
+    z-index: 9;
+}
+.dragItem:hover,.creatSvg:hover{
+    box-shadow:0px 2px 8px 0px rgba(0,0,0,0.08);
+    cursor: pointer;
+}
+.topTitle{
+    height: 56px;
+    background: white;
+    line-height: 56px;
+    padding: 0 10px;
+    font-family: monospace;
+    padding-left: 80px;
+}
+.bottomMain{
+    height: calc(100% - 56px);
+    width: 100%;
+}
+.topMainShow{
+    height: calc(100% - 100px);
+    width: 100%;
+}
+.leftMain{
+    height: 100%;
+    background: #444444;
+    width: 80px;
+    float: left;
+}
+.leftMain div{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    height: 80px;
+    flex-wrap: wrap;
+}
+.leftMain div>span{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: -22px;
+}
+.leftMain div>img{
+    width: 25px;
+    height: 25px;
+}
+.leftMain div:hover,.leftMain div.active{
+    background: #575959;
+}
+.rightMain{
+    height: 100%;
+    width: calc(100% - 80px);
+    float: right;
+}
+.leftStore,.rightSetProp,.mainStage{
+    padding: 16px;
+    border-top:1px solid #EBEDF0;
+}
+.leftStore{
+    height: 100%;
+}
+#stateProp{
+   height: calc(100% - 149px);
+   overflow: auto;
+   width: 100%;
+}
+.rightSetProp{
+    height: 100%;
+}
+.mainStage{
+    background: #F2F3F5;
+    height: 100%;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+#stageBg{
+    width: 90%;
+    height: 98%;
+    background: white;
+    position: relative;
+    overflow: hidden;
+    background: url("../images/bg.png") no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+}
+.TimelineRuler{
+    height: 100%;
+    
+    color: #fff;
+    width: calc(100% - 100px);
+    margin-left: 100px;
+}
+.allTime{
+    height: 36px;
+    line-height: 36px;
+    border-top:1px solid #EBEDF0;
+    padding: 0 10px;
+}
+.rightAt{
+    float: right;
+    right: 10px;
+}
+.stagelineD{
+    height: 30px;
+    background: #fff;
+    line-height: 30px;
+    padding-left: 102px;
+    position: relative;
+    
+}
+.stagelineD:last-child{
+    /* border-top: 1px solid #C2C2C2; */
+    box-shadow:0px -1px 0px 0px rgba(230,230,230,1);
+}
+.stagelineD .listItem{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.moveItem .texti{
+    width: 100%;
+    height: 100%;
+    line-height: 40px;
+    display: block;
+    font-size: 22px;
+    text-align: left;
+}
+.stagelineD .listItem span{
+    height:24px;
+    background:rgba(2,167,249,1);
+    border-radius:4px;
+    display: inline-block;
+    text-align: center;
+    line-height: 24px;
+    color: white;
+    position: absolute;
+    overflow: hidden;/*内容超出后隐藏*/
+    text-overflow: ellipsis;/* 超出内容显示为省略号*/
+    white-space: nowrap;
+    box-sizing: border-box;
+    padding: 0 6px;
+}
+.stagelineD .listItem span.green{
+    background:#02D8B5;
+}
+.timelineD{
+    /* padding-left: 102px; */
+    background: #fff;
+}
+.dragList{
+    height: calc(100% - 50px);
+    width: 100%;
+    display: block;
+    margin-top: 10px;
+    overflow: auto;
+}
+.dragItem{
+    width: 49%;
+    height: 90px;
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-repeat:no-repeat;
+    background-size:  80% 80%;
+    background-position: center;
+}
+
+.creatSvg,.deSvg{
+    width: 49%;
+    height: 90px;
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-repeat:no-repeat;
+    background-size:  70% 65%;
+    background-position: center;
+}
+.timelineD,.TimelineRuler{
+    height: 30px;
+    position: relative;
+}
+
+.timeRuler {
+	display: flex;
+    justify-content: flex-start;
+    overflow: hidden;
+    position: relative;
+    height: 10px;
+    position: absolute;
+    top: 10px;
+    width: 100% !important;
+    align-items: center;
+    cursor: pointer;
+}
+
+.timeRuler .ruleItem {
+    width: 80px;
+    display: flex;
+    height: 10px;
+    align-items: center;
+	border-right: 1px solid #E6E6E6
+}
+
+.timeRuler .ruleItem .time {
+    padding-left: 6px;
+    display:none;
+}
+
+.timeRuler .ruleItem .lines {
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-pack: start;
+	justify-content: flex-start;
+	-ms-flex-align: end;
+	align-items: flex-end
+}
+
+.timeRuler .ruleItem .rule-line {
+	height: 7px;
+	width: 1px;
+	background-color: #dbdddf
+}
+
+.timeRuler .ruleItem .middleLine {
+	height: 10px
+}
+
+.actStationtitle{
+    padding:0 8px;
+    margin-top: 10px;
+    border-left: 1px solid #02D8B5;
+}
+.setProps{
+    width: 100%;
+    margin-top: 10px;
+}
+.labelInp{
+    width: calc(100% - 120px) !important;
+    display: inline-block !important;
+}
+.propsList{
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+.setProps>label{
+    width: 106px;
+    display: inline-block;
+    text-align: right;
+    padding-right: 10px;
+}
+#addStage{
+    float: right;
+}
+.nombtn{
+    border-radius: 4px;
+}
+.bleft{
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+.toptool{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.playicon{
+    background:url(../images/icons/play.png) no-repeat center;
+    margin-right: 6px;
+}
+.pauseicon{
+    background:url(../images/icons/resume.png) no-repeat center;
+}
+
+.bottool{
+    display: flex;
+    justify-content: center;
+}
+.bleft{
+    padding: 10px;
+}
+.bottool span{
+    width: 140px;
+    height: 36px;
+    border-radius:4px;
+    border:1px solid rgba(230,230,230,1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.playicon,.pauseicon,.stopicon{
+    background-size: 16px 16px;
+    width: 68px;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    display: inline-flex;
+    border-radius:4px;
+    border:1px solid rgba(230,230,230,1)
+}
+.stopicon{
+    display: none;
+}
+.trasn{
+    order-radius: .5em .5em 0 0;
+    margin: 20px;
+    display: block;
+    height: 10px;
+    position: absolute;
+    left: -24px;
+    top: -30px;
+    width: 10px;
+    background: #F6582A;
+    transform-origin: bottom;
+    transform: scaleY(-0.7) perspective(.5em) rotateX(5deg);
+}
+.leftOpera{
+    position: absolute;
+    width: 80px;
+    left: 0;
+    top: 0;
+    height: 30px;
+    padding: 0 6px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.leftOpera>span{
+    width: 16px;
+    height: 16px;
+    display: inline-flex;
+}
+.movie{
+    background: url(../images/icons/movie.svg) no-repeat center;
+}
+.eyes{
+    background: url(../images/icons/eyes.svg) no-repeat center;
+}
+.locks{
+    background: url(../images/icons/lock.svg) no-repeat center;
+}
+.text{
+    background: url(../images/icons/text.svg) no-repeat center;
+}
+#timeRuler{
+    background: #fff;
+    background-image:
+        linear-gradient(90deg, #E6E6E6 1px, transparent 0);
+    background-size: 50px;
+}
+.moveItem{
+    background-repeat: no-repeat;
+    background-size:  80% 80%;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    color: white;
+    align-items: center;
+}
+.activeM{
+    box-shadow:0px 2px 8px 2px rgba(255,255,255,0.8);
+    opacity: 1 !important;
+    z-index: 1;
+}
+.canvasDe,.canvasDe canvas{
+    width: 200px;
+    height: 130px;
+}
+.moveItem:hover .buttons{
+    display: flex;
+}
+.moveItem .buttons{
+    width: 100%;
+    position: absolute;
+    top: -40px;
+    height: 40px;
+    display: flex;
+    justify-content: space-evenly;
+    display: none;
+}
+.moveItem .buttons span{
+    background-color: #fff;
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    background-position: center;
+    background-size: 16px 16px;background-repeat: no-repeat;
+    border-radius: 14px;
+    cursor: pointer;
+}
+.moveItem .buttons span:hover{
+    background-color: #3ABCFD;
+}
+.magic{
+    background-image: url(../images/icons/magic.png);
+}
+.magic{
+    position: relative;
+}
+.topNum{
+    position: absolute;
+    display: flex;
+    color: white;
+    right: -8px;
+    top: -8px;
+    background: #F6582A;
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+}
+.magic:hover{
+    background-image: url(../images/icons/magic2.png);
+}
+.change{
+    background-image: url(../images/icons/change.png);
+}
+.change:hover{
+    background-image: url(../images/icons/change2.png);
+}
+.modal{
+    position: absolute;
+    left: 200px;
+    top: 200px;
+    width:198px;
+    height:325px;
+    background:rgba(255,255,255,1);
+    box-shadow:0px 2px 8px 0px rgba(31,72,50,1);
+    border-radius:4px;
+    padding: 10px;
+    display: none;
+}
+.modal h4{
+    height: 30px;
+    font-size: 14px;
+    color: #333333;
+}
+
+.modal .acts{
+    width:96px;
+    height:40px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background:rgba(255,255,255,1);
+    cursor: pointer;
+    margin-top: 4px;
+}
+.modal .disn{
+    display: none;
+}
+.modal .acts:hover{
+    background-color: #3ABCFD !important;
+    color: white !important;
+}
+.modal .active{
+    background-color: #3ABCFD !important;
+    color: white !important;
+}
+.rightX{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}
+.normalSet{
+    
+    margin-top: 10px;
+}
+.normalSet div{
+    width: 100%;
+    margin-top: 6px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.normalSet .type2{
+    display: none;
+}
+.normalSet .layui-input{
+    width: 106px !important;
+}
+.normalSet label{
+    width: 86px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.saveAct,.savedeft,.savedefn{
+    background: #02D8B5;
+    margin: 0 auto;
+    width: 120px;
+    height: 40px;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+}

@@ -1,0 +1,37 @@
+{
+  "id": "1551625",
+  "name": "小水滴",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "2815984",
+      "name": "x",
+      "font_class": "x",
+      "unicode": "e62c",
+      "unicode_decimal": 58924
+    },
+    {
+      "icon_id": "13815129",
+      "name": "暂停 停止",
+      "font_class": "zantingtingzhi",
+      "unicode": "e620",
+      "unicode_decimal": 58912
+    },
+    {
+      "icon_id": "2815742",
+      "name": "展开",
+      "font_class": "zhankai",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "8955974",
+      "name": "返回2",
+      "font_class": "return2",
+      "unicode": "e6fc",
+      "unicode_decimal": 59132
+    }
+  ]
+}

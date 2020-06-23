@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>小水滴-设计器</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="css/iconfont/iconfont.css">
+  <link rel="stylesheet" href="css/main.css" media="all">
+  <link rel="stylesheet" href="/js/lib/layui/css/layui.css" media="all">
+</head>
+
+<body>
+  <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+  <!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+  <div class="main-container">
+    <div class="layui-row">
+      <div class="layui-col-xs12 topTitle">
+        <span class="logo"></span>
+        <h4>小水滴应用题
+          <!-- <button id="playStage">开始</button><button id="pauseStage">暂停</button><button
+            id="replayStage">重新开始</button> -->
+        </h4>
+      </div>
+    </div>
+    <div class="layui-row bottomMain">
+      <div class="leftMain">
+        <div data-type='1'>
+          <img src="images/icons/water.svg" alt="">
+          <span>小水滴</span>
+        </div>
+        <div class="active" data-type='2'>
+          <img src="images/icons/source.svg" alt="">
+          <span>素材</span>
+        </div>
+        <div data-type='3'>
+          <img src="images/icons/text.png" alt="">
+          <span>文字</span>
+        </div>
+        <div data-type='4'>
+          <img src="images/icons/img.svg" alt="">
+          <span>图形</span>
+        </div>
+      </div>
+      <div class="rightMain">
+        <div class="layui-row topMainShow">
+          <div class="layui-col-xs2 leftStore">
+            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题"
+              class="layui-input">
+            <div class="dragList">
+
+            </div>
+          </div>
+          <div class="layui-col-xs10 mainStage">
+            <div id="stageBg">
+              <!-- <div class="moveItem canvasDe"
+              style="right: 40px; bottom: 80px; position: absolute; cursor: move;opacity: 0;"
+              data-name="scene5.svg" data-type="2" id="item_1" data-startt="0">
+              <canvas id="demoCanvas">
+
+              </canvas>
+              <div class="buttons">
+                <span class="magic"></span>
+                <span class="change"></span>
+              </div>
+            </div> -->
+
+            
+            <!-- <div class="moveItem" data-name="实物图" data-type="3"
+                style="left: 60px; top: 40px; position: absolute; cursor: move; width: 200px; height: 40px;opacity: 0.7;"
+                id="item_2" data-startt="1"><span class="texti">实物图</span>
+                <div class="buttons">
+                  <span class="magic"><b class="topNum">2</b></span>
+                  <span class="change"></span>
+                </div>
+              </div> -->
+              <!-- <div class="moveItem" data-name="实物图" data-type="3"
+                style="left: 60px; top: 40px; position: absolute; cursor: move; width: 200px; height: 40px;opacity: 0.7;"
+                id="item_2" data-startt="1"><span class="texti">实物图</span>
+                <div class="buttons">
+                  <span class="magic"></span>
+                  <span class="change"></span>
+                </div>
+              </div>
+              <div class="moveItem" data-name="下面我们先来认识实物图." data-type="3"
+                style="left: 60px; top: 100px; position: absolute; cursor: move; width: 400px; height: 40px;opacity: 0.7;"
+                id="item_3" data-startt="3"><span class="texti">下面我们先来认识实物图.</span>
+                <div class="buttons">
+                  <span class="magic"></span>
+                  <span class="change"></span>
+                </div>
+              </div>
+              <div class="moveItem" data-name="看下面这道题目：" data-type="3"
+                style="left: 60px; top: 100px; position: absolute; cursor: move; width: 300px; height: 40px;opacity: 0.7;"
+                id="item_4" data-startt="3"><span class="texti">看下面这道题目：</span>
+                <div class="buttons">
+                  <span class="magic"></span>
+                  <span class="change"></span>
+                </div>
+              </div>
+              <div class="moveItem" data-name="从左往右数，小军是第3个，从右往左数小军是第5个，这一排一共有几人" data-type="3"
+                style="left: 60px; top: 160px; position: absolute; cursor: move; width: calc(100% - 120px); height: 80px;opacity: 0.7;"
+                id="item_5" data-startt="3"><span class="texti">从左往右数，小军是第3个，从右往左数小军是第5个，这一排一共有几人?</span>
+                <div class="buttons">
+                  <span class="magic"></span>
+                  <span class="change"></span>
+                </div>
+              </div>
+              <div class="moveItem"
+                style=" right: 40px; bottom: -300px; position: absolute; cursor: move; width: 180px; height: 200px;opacity: 0.7;"
+                data-name="scene5.svg" data-type="2" id="item_6" data-startt="0">
+                <canvas id="demoCanvas">
+
+                </canvas>
+                <div class="buttons">
+                  <span class="magic"></span>
+                  <span class="change"></span>
+                </div>
+              </div>
+
+
+
+              <div class="moveItem"
+                style="background-image: url('/images/sprite/quest.png'); right: 180px; bottom: 30px; position: absolute; background-size: 90% 90%;cursor: move; width: 700px; height: 90px;opacity: 0.7;"
+                data-name="scene5.svg" data-type="2" id="item_7" data-startt="0">
+                <div class="buttons">
+                  <span class="magic"></span>
+                  <span class="change"></span>
+                </div>
+              </div>
+
+
+              <div class="moveItem" data-name="我们可以通过画实物图把这个队伍给画出来。" data-type="3"
+                style="z-index:1;right: 260px; bottom: 80px; position: absolute; cursor: move; width: 60%; height: 80px;opacity: 0.7;"
+                id="item_8" data-startt="3"><span class="texti" style="color: #000;">我们可以通过画实物图把这个队伍给画出来。</span>
+                <div class="buttons">
+                  <span class="magic"></span>
+                  <span class="change"></span>
+                </div>
+              </div>
+
+
+              <div class="moveItem" data-name="首先把小军同学画出来 ." data-type="3"
+                style="z-index:1;right: 260px; bottom: 80px; position: absolute; cursor: move; width: 60%; height: 80px;opacity: 0.7;"
+                id="item_9" data-startt="3"><span class="texti" style="color: #000;">首先把小军同学画出来 .</span>
+                <div class="buttons">
+                  <span class="magic"></span>
+                  <span class="change"></span>
+                </div>
+              </div>
+
+
+              <div class="moveItem"
+                style="background-image: url('/images/sprite/xm.png'); left: 300px; top: 250px; position: absolute;cursor: move;width: 50px; height: 90px;opacity: 0.7"
+                data-name="scene5.svg" data-type="2" id="item_10" data-startt="0">
+                <div class="buttons">
+                  <span class="magic"></span>
+                  <span class="change"></span>
+                </div>
+              </div>
+
+
+              <div class="moveItem" data-name="小军" data-type="3"
+                style="z-index:1;left: 300px; top: -350px; position: absolute; cursor: move; width: 50px; height: 40px;opacity: 0.7;"
+                id="item_11" data-startt="3"><span class="texti">小军</span>
+                <div class="buttons">
+                  <span class="magic"></span>
+                  <span class="change"></span>
+                </div>
+              </div>
+
+              <div class="moveItem" data-name="" data-type="3"
+                style="z-index:1;right: 260px; bottom: 80px; position: absolute; cursor: move; width: 60%; height: 80px;opacity: 0.7;"
+                id="item_12" data-startt="3"><span class="texti" style="color: #000;">然后画出左边的2个同学，从左数一数小军是不是第3个 .</span>
+                <div class="buttons">
+                  <span class="magic"></span>
+                  <span class="change"></span>
+                </div>
+              </div>
+
+              <div class="moveItem"
+                style="background-image: url('/images/sprite/xm.png'); left: 240px; top: 250px; position: absolute;cursor: move;width: 50px; height: 90px;opacity: 0.7;"
+                data-name="scene5.svg" data-type="2" id="item_13" data-startt="0">
+                <div class="buttons">
+                  <span class="magic"></span>
+                  <span class="change"></span>
+                </div>
+              </div>
+
+
+              <div class="moveItem"
+                style="background-image: url('/images/sprite/xm.png'); left: 180px; top: 250px; position: absolute;cursor: move;width: 50px; height: 90px;opacity: 0.7;"
+                data-name="scene5.svg" data-type="2" id="item_14" data-startt="0">
+                <div class="buttons">
+                  <span class="magic"></span>
+                  <span class="change"></span>
+                </div>
+              </div>
+
+              <div class="moveItem"
+                style="background-image: url('/images/sprite/kuo.png');  left: 180px; top: 330px; position: absolute;cursor: move;width: 120px; height: 16px;opacity: 0.7;"
+                data-name="scene5.svg" data-type="2" id="item_15" data-startt="0">
+                <div class="buttons">
+                  <span class="magic"></span>
+                  <span class="change"></span>
+                </div>
+              </div>
+
+              <div class="moveItem" data-name="小军" data-type="3"
+                style="z-index:1;left: 224px; top: 350px; position: absolute; cursor: move; width: 50px; height: 40px;opacity: 0.7;"
+                id="item_16" data-startt="3"><span class="texti">2人</span>
+                <div class="buttons">
+                  <span class="magic"></span>
+                  <span class="change"></span>
+                </div>
+              </div>
+
+              <div class="moveItem" data-name="" data-type="3"
+                style="z-index:1;right: 260px; bottom: 80px; position: absolute; cursor: move; width: 60%; height: 80px;opacity: 0.7;"
+                id="item_17" data-startt="3"><span class="texti" style="color: #000;">接着我们画小军右边的同学，让小军变成从右往左数第5个
+                  .</span>
+                <div class="buttons">
+                  <span class="magic"></span>
+                  <span class="change"></span>
+                </div>
+              </div>
+
+              <div class="moveItem"
+                style="background-image: url('/images/sprite/xm.png'); left: 360px; top: 250px; position: absolute;cursor: move;width: 50px; height: 90px;opacity: 0.7;"
+                data-name="scene5.svg" data-type="2" id="item_18" data-startt="0">
+                <div class="buttons">
+                  <span class="magic"></span>
+                  <span class="change"></span>
+                </div>
+              </div>
+
+
+              <div class="moveItem"
+                style="background-image: url('/images/sprite/xm.png'); left: 420px; top: 250px;  position: absolute;cursor: move;width: 50px; height: 90px;opacity: 0.7;"
+                data-name="scene5.svg" data-type="2" id="item_19" data-startt="0">
+                <div class="buttons">
+                  <span class="magic"></span>
+                  <span class="change"></span>
+                </div>
+              </div>
+
+              <div class="moveItem"
+                style="background-image: url('/images/sprite/xm.png'); left: 480px; top: 250px;  position: absolute;cursor: move;width: 50px; height: 90px;opacity: 0.7;"
+                data-name="scene5.svg" data-type="2" id="item_20" data-startt="0">
+                <div class="buttons">
+                  <span class="magic"></span>
+                  <span class="change"></span>
+                </div>
+              </div>
+
+
+              <div class="moveItem"
+                style="background-image: url('/images/sprite/xm.png'); left: 540px; top: 250px;  position: absolute;cursor: move;width: 50px; height: 90px;opacity: 0.7;"
+                data-name="scene5.svg" data-type="2" id="item_21" data-startt="0">
+                <div class="buttons">
+                  <span class="magic"></span>
+                  <span class="change"></span>
+                </div>
+              </div>
+
+              <div class="moveItem"
+                style="background-image: url('/images/sprite/kuo.png'); left: 360px; top: 330px; position: absolute;cursor: move;width: 220px; height: 16px;opacity: 0.7;"
+                data-name="scene5.svg" data-type="2" id="item_22" data-startt="0">
+                <div class="buttons">
+                  <span class="magic"></span>
+                  <span class="change"></span>
+                </div>
+              </div>
+
+              <div class="moveItem" data-name="小军" data-type="3"
+                style="z-index:1;left: 450px; top: 350px;position: absolute; cursor: move; width: 50px; height: 40px;opacity: 0.7;"
+                id="item_23" data-startt="3"><span class="texti">4人</span>
+                <div class="buttons">
+                  <span class="magic"></span>
+                  <span class="change"></span>
+                </div>
+              </div>
+
+              <div class="moveItem" data-name="" data-type="3"
+                style="z-index:1;right: 260px; bottom: 80px; position: absolute; cursor: move; width: 60%; height: 80px;opacity: 0.7;"
+                id="item_24" data-startt="3"><span class="texti" style="color: #000;">观察一下这个图，</br>左边【3-1】+小军【1】+右边【5-1】共7人
+                  .</span>
+                <div class="buttons">
+                  <span class="magic"></span>
+                  <span class="change"></span>
+                </div>
+              </div>
+
+              <div class="moveItem"
+                style="background-image: url('/images/sprite/kuo.png'); left: 150px; top: 330px; position: absolute;cursor: move;width: 480px; height: 16px;opacity: 0.7;"
+                data-name="scene5.svg" data-type="2" id="item_25" data-startt="0">
+                <div class="buttons">
+                  <span class="magic"></span>
+                  <span class="change"></span>
+                </div>
+              </div>
+
+              <div class="moveItem" data-name="小军" data-type="3"
+                style="z-index:1;left: 370px; top: 350px; position: absolute; cursor: move; width: 50px; height: 40px;opacity: 0.7;"
+                id="item_26" data-startt="3"><span class="texti">7人</span>
+                <div class="buttons">
+                  <span class="magic"></span>
+                  <span class="change"></span>
+                </div>
+              </div> -->
+
+
+            </div>
+          </div>
+
+        </div>
+        <div class="layui-row" style="position: relative;background: #f0f1f3;">
+          <div class="layui-col-xs2 bleft">
+            <div class="toptool">
+              <span class="playicon" id="playStage"></span>
+              <span class="pauseicon" id="resumeStage"></span>
+              <span class="iconfont icon-zantingtingzhi stopicon" id="pauseStage" data-status="playing"></span>
+            </div>
+            <div class="bottool">
+              <span>
+                进入全局模式
+              </span>
+            </div>
+          </div>
+          <div class="layui-col-xs10">
+            <span class="timeLineS">
+              <i class="trasn"></i>
+            </span>
+            <div class="layui-row timelineD">
+              <div class="TimelineRuler right">
+                <div id="ruler-mask" class="mask">
+                  <div id="timeRuler" class="timeRuler" style="left: 0px; width: 1690px;">
+
+                  </div>
+                </div>
+                <div class="v-portal" style="display: none;"></div>
+              </div>
+            </div>
+            <div class="layui-row stagelineD" style="margin-top:8px;">
+              <div class="leftOpera">
+                <span class="movie"></span>
+                <span class="eyes"></span>
+                <span class="locks"></span>
+              </div>
+              <div class="listItem topline">
+                <!-- <span>片头一</span>
+                <span>小水滴点头</span>
+                <span>圈中</span> -->
+              </div>
+            </div>
+            <div class="layui-row stagelineD">
+              <div class="leftOpera">
+                <span class="text"></span>
+                <span class="eyes"></span>
+                <span class="locks"></span>
+              </div>
+              <div class="listItem botline">
+                <!-- <span class="green">这是一段字幕显示不全…</span>
+                <span class="green">这是一段字幕</span> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal actDiv">
+    <h4>动效</h4>
+    <i class="iconfont icon-x rightX"></i>
+    <span class="acts" data-c='1'>显示</span>
+    <span class="acts" data-c='2'>隐藏</span>
+    <span class="acts" data-c='3'>移动</span>
+    <span class="acts" data-c='4'>闪烁</span>
+    <span class="acts disn" data-c='wave'>挥手</span>
+    <span class="acts disn" data-c='stand'>站立</span>
+    <span class="acts disn" data-c='flyIn'>飞入</span>
+    <div class="normalSet">
+      <div>
+        <label for="">持续时间：</label>
+        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="单位（s）"
+          class="layui-input durat">
+      </div>
+      <div class="type2">
+        <label for="">终点坐标x：</label>
+        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="单位（px）"
+          class="layui-input finax">
+      </div>
+      <div class="type2">
+        <label for="">终点坐标y：</label>
+        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="单位（px）"
+          class="layui-input finay">
+      </div>
+
+    </div>
+    <button class="saveAct">保存</button>
+  </div>
+  <div class="modal deftextDiv">
+    <h4>基础设置</h4>
+    <i class="iconfont icon-x rightX"></i>
+    <div class="normalSet">
+      <div>
+        <label for="">文字内容：</label>
+        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="文字内容"
+          class="layui-input textInfo">
+      </div>
+    </div>
+    <button class="savedeft">设置</button>
+  </div>
+  <div class="modal defnomDiv">
+    <h4>基础设置</h4>
+    <i class="iconfont icon-x rightX"></i>
+    <div class="normalSet">
+      <div>
+        <label for="">初始位置x：</label>
+        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="单位（px）"
+          class="layui-input sx">
+      </div>
+      <div>
+        <label for="">初始位置y：</label>
+        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="单位（px）"
+          class="layui-input sy">
+      </div>
+      <div>
+        <label for="">初始宽度：</label>
+        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="单位（px）"
+          class="layui-input sw">
+      </div>
+      <div>
+        <label for="">初始高度：</label>
+        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="单位（px）"
+          class="layui-input sh">
+      </div>
+    </div>
+    <button class="savedefn">设置</button>
+  </div>
+  <div id="svg">
+
+  </div>
+
+  <script src="js/jquery.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="js/lib/layui/layer/layer.js"></script>
+  <script src="js/lib/createjs/createjs.js" charset="utf-8"></script>
+  <script src="js/svg.js" charset="utf-8"></script>
+  <script src="js/svg.draw.js" charset="utf-8"></script>
+
+  <script src="js/lib/greensock-js/src/minified/TweenMax.min.js"> </script>
+
+  <script type="text/javascript" src="js/util.js"></script>
+  <script src="js/main.js" type="module" charset="utf-8"></script>
+  <script>
+
+  </script>
+
+</body>
+
+</html>
