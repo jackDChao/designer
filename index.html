@@ -380,8 +380,8 @@
     <i class="iconfont icon-x rightX"></i>
     <span class="acts" data-c='1'>显示</span>
     <span class="acts" data-c='2'>隐藏</span>
-    <span class="acts" data-c='3'>移动</span>
-    <span class="acts" data-c='4'>闪烁</span>
+    <!-- <span class="acts" data-c='3'>移动</span> -->
+    <!-- <span class="acts" data-c='4'>闪烁</span> -->
     <span class="acts disn" data-c='wave'>挥手</span>
     <span class="acts disn" data-c='stand'>站立</span>
     <span class="acts disn" data-c='flyIn'>飞入</span>
@@ -391,7 +391,7 @@
         <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="单位（s）"
           class="layui-input durat">
       </div>
-      <div class="type2">
+      <!-- <div class="type2">
         <label for="">终点坐标x：</label>
         <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="单位（px）"
           class="layui-input finax">
@@ -400,11 +400,24 @@
         <label for="">终点坐标y：</label>
         <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="单位（px）"
           class="layui-input finay">
-      </div>
+      </div> -->
 
     </div>
     <button class="saveAct">保存</button>
   </div>
+
+  <div class="modal acttimeDiv">
+    <h4>持续时间设置</h4>
+    <i class="iconfont icon-x rightX"></i>
+    <div class="normalSet">
+      <div>
+        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="单位（s）"
+          class="layui-input timeset">
+      </div>
+    </div>
+    <button class="saveActTime">保存</button>
+  </div>
+  
   <div class="modal deftextDiv">
     <h4>基础设置</h4>
     <i class="iconfont icon-x rightX"></i>
@@ -459,7 +472,6 @@
   <script type="text/javascript" src="js/util.js"></script>
   <script src="js/main.js" type="module" charset="utf-8"></script>
   <script>
-
   </script>
 
 </body>

@@ -701,6 +701,7 @@ class stage{
         this.animation.animationAction = {}
         // this.animation.initAnimate(waterd)
         this.animation.seek(0.1)
+        this.noActionSet = null
         // this.addtotl(waterd)
         let that = this
 
@@ -718,12 +719,37 @@ class stage{
             if($(parent).hasClass('moveItem') && showArr.some(ele=> $(ele).attr('id') === $(parent).attr('id'))){
                 $(parent).addClass('activeM')
                 $(parent).find('.buttons').remove()
-                    $(parent).append(`<div class="buttons">
-                    <span class="magic"><b class="topNum">1</b></span>
+                // <span class="magic"><b class="topNum">1</b></span>
+                let buttonHtml = `<div class="buttons">
+                    <span class="magic"></span>
                     <span class="change"></span>
-                  </div>`)
+                </div>`
+                $(parent).append(buttonHtml)
             }
         })
+
+        dragStageItem('moveItem',(res,ele)=>{
+            this.nowElement = ele
+            this.noActionSet = res
+            let startt = this.timelineD.getTime() < 0.02 ? 0.02 : this.timelineD.getTime()
+            if(!this.checkCanInAct(startt,$(this.nowElement).attr('id'),this.animation.animationAction)){
+                layer.msg('请设定合理的动效开始时间')
+                return
+            }
+            this.noActionSet.startt = startt
+            $(".acttimeDiv").show()
+        })
+
+        $(document).on('click', '.saveActTime', (e)=>  {
+            console.log(this.noActionSet,$(".saveActTime").parent().find('.timeset').val())
+            this.noActionSet.duration = Number($(".saveActTime").parent().find('.timeset').val())
+            this.addAction(this.noActionSet)
+            this.timeActionList.addToTimeline(this.nameRev()+'移动缩放',this.noActionSet)
+            $('.timeset').val('')
+            $(".acttimeDiv").hide()
+            this.noActionSet = null
+        })
+
         $(document).on('mouseout', '.moveItem', (e)=>  {
             if(e.target.nodeName != 'BUTTON'){
                 $('.activeM').removeClass('activeM')
@@ -732,11 +758,16 @@ class stage{
         
         // 绑定事件
         $(document).on('click', '#playStage', ()=> {
-            this.animation.initAnimate(this.animation.animationAction)
+            console.log(this.animation.animationAction)
+            // this.animation.initAnimate(this.animation.animationAction)
             $("#pauseStage").css('display','inline-flex')
             $("#resumeStage").css('display','none')
-            this.animation.play()
-            this.timelineD.tlRestart()
+            this.animation.pause()
+            setTimeout(() => {
+                this.animation.restart()
+                this.timelineD.tlRestart()
+            }, 100);
+            
         })
         
         $(document).on('click', '#replayStage', ()=> {

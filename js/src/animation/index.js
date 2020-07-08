@@ -49,6 +49,7 @@ class animation {
         } else {
             this.animationAction[tr] = [nelObj]
         }
+        this.initAnimate(this.animationAction)
     }
     addAnimate(obj) {
         let nelObj = JSON.parse(JSON.stringify(obj))
@@ -63,11 +64,13 @@ class animation {
                 this.waterDrop.pause()
             },nelObj.startt+nelObj.duration,'sequence')
         }
+        console.log(nelObj.targets, nelObj.duration, nelObj)
         this.animateTL.add(
                 TweenLite.to(nelObj.targets, nelObj.duration, nelObj), nelObj.startt,'sequence')
     }
     // 开始播放
     play(time) {
+        console.log(this.animationAction)
         this.animateTL.play(time || 0)
         // this.waterDrop.play()
     }

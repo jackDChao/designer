@@ -410,10 +410,11 @@ html,body,.main-container{
     justify-content: center;
     color: white;
     align-items: center;
+    border:1px solid transparent;
 }
 .activeM{
-    box-shadow:0px 2px 8px 2px rgba(255,255,255,0.8);
     opacity: 1 !important;
+    border:1px dotted rgba(151,151,151,1);
     z-index: 1;
 }
 .canvasDe,.canvasDe canvas{
@@ -537,13 +538,24 @@ html,body,.main-container{
 .normalSet .layui-input{
     width: 106px !important;
 }
+.normalSet .timeset{
+    width: 100% !important;
+}
+.actDiv{
+    height: 210px;
+}
+.acttimeDiv{
+    height: 180px;
+    left: calc(50% - 99px);
+    top: calc(50% - 120px);
+}
 .normalSet label{
     width: 86px;
     display: inline-flex;
     align-items: center;
     justify-content: flex-end;
 }
-.saveAct,.savedeft,.savedefn{
+.saveAct,.savedeft,.savedefn,.saveActTime{
     background: #02D8B5;
     margin: 0 auto;
     width: 120px;
