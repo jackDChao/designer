@@ -733,7 +733,7 @@ class stage{
             this.noActionSet = res
             let startt = this.timelineD.getTime() < 0.02 ? 0.02 : this.timelineD.getTime()
             if(!this.checkCanInAct(startt,$(this.nowElement).attr('id'),this.animation.animationAction)){
-                layer.msg('请设定合理的动效开始时间')
+                layer.msg('当前角色已经有一个动效了')
                 return
             }
             this.noActionSet.startt = startt
@@ -890,7 +890,7 @@ class stage{
             }
             let startt = this.timelineD.getTime() < 0.02 ? 0.02 : this.timelineD.getTime()
             if(!this.checkCanInAct(startt,$(this.nowElement).attr('id'),this.animation.animationAction)){
-                layer.msg('请设定合理的动效开始时间')
+                layer.msg('当前角色已经有一个动效了')
                 return
             }
             let actobj = {
@@ -988,7 +988,10 @@ class stage{
         }
         return true
     }
-    addAction(obj){
+    addAction(obj,flag){
+        if(flag){
+            obj.startt = this.timelineD.getTime() < 0.02 ? 0.02 : this.timelineD.getTime()
+        }
         this.animation.addAction(obj)
     }
 }

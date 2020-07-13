@@ -71,7 +71,7 @@ function dragBotItem(el,cb) {
                 var newDv = this.cloneNode(true);
                 $(this).remove()
                 let nowid = setOwnId(),nleft = left-offeox,ntop = top-offeoy
-                $(newDv).css('left', nleft).css('top', ntop).attr('id',nowid).attr("data-startt",'0').removeClass('dragItem')
+                $(newDv).css('left', nleft).css('top', ntop).attr('id',nowid).attr("data-startt",'0').removeClass('dragItem').css('opacity', 0)
                 console.log($(newDv))
                 let ntarget = {
                     targets:'#'+nowid,
@@ -123,10 +123,12 @@ function dragStageItem(el,cb) {
         var y = e.pageY - disY ;
         var width = that.offsetWidth;
         var height = that.offsetHeight;
+        let oleft = that.getBoundingClientRect().left
+        let otop = that.getBoundingClientRect().top
         var dv = null;
         nowid = $(that).attr('id')
         dv = that.cloneNode(true)
-        $(dv).css('left', that.getBoundingClientRect().left).css('top', that.getBoundingClientRect().top).css('position', 'absolute').css('cursor', 'move')
+        $(dv).css('left', oleft).css('top', otop).css('position', 'absolute').css('cursor', 'move')
         .css('width',width).css('height',height)
 
         document.body.appendChild(dv);
@@ -158,7 +160,6 @@ function dragStageItem(el,cb) {
             var e = e || window.event;
             var left = e.pageX - x + offeox;
             var top = e.pageY - y + offeoy;
-            console.log(left,top)
             if (left < offeox || top < offeoy) {
                 $(this).remove()
             }
@@ -166,7 +167,11 @@ function dragStageItem(el,cb) {
             let thisc = this.getBoundingClientRect()
             nleft = thisc.left - offeox
             ntop = thisc.top - offeoy
-            console.log(left,nleft,top,ntop)
+            if(Math.abs(left - oleft) < 10 && Math.abs(top - otop) < 10){
+                $(this).remove()
+                return 
+            }
+            console.log(left,nleft,top,ntop,oleft,otop)
             if (left > offeox && top > offeoy) {
                 let ntarget = {
                     targets:'#'+nowid,

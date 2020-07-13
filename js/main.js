@@ -16,7 +16,7 @@ let mainStage = new stage($("#stageBg"))
 
 // 初始化拖拽实例
 dragBotItem('dragItem', res => {
-    mainStage.addAction(res)
+    mainStage.addAction(res,true)
 })
 
 
