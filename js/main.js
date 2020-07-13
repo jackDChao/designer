@@ -15,7 +15,11 @@ let mainStage = new stage($("#stageBg"))
 // }, 10000);
 
 // 初始化拖拽实例
-dragBotItem('dragItem', res => {
+dragBotItem('dragItem', (res,dom) => {
+    let initObj = JSON.parse(JSON.stringify(res))
+    initObj.startt = 0 
+    initObj.opacity = 0
+    mainStage.addAction(initObj)
     mainStage.addAction(res,true)
 })
 

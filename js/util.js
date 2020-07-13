@@ -71,7 +71,7 @@ function dragBotItem(el,cb) {
                 var newDv = this.cloneNode(true);
                 $(this).remove()
                 let nowid = setOwnId(),nleft = left-offeox,ntop = top-offeoy
-                $(newDv).css('left', nleft).css('top', ntop).attr('id',nowid).attr("data-startt",'0').removeClass('dragItem').css('opacity', 0)
+                $(newDv).css('left', nleft).css('top', ntop).attr('id',nowid).attr("data-startt",'0').removeClass('dragItem')
                 console.log($(newDv))
                 let ntarget = {
                     targets:'#'+nowid,
@@ -88,7 +88,7 @@ function dragBotItem(el,cb) {
                 }
                 $("#stageBg").append($(newDv))
                 nowSelectItem = $(newDv)
-                cb&&cb(ntarget)
+                cb&&cb(ntarget,$(newDv))
                 
             }
         })
