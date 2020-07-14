@@ -19,8 +19,13 @@ dragBotItem('dragItem', (res,dom) => {
     let initObj = JSON.parse(JSON.stringify(res))
     initObj.startt = 0 
     initObj.opacity = 0
-    mainStage.addAction(initObj)
+    console.log(mainStage.timelineD.getTime())
+    let ntime = mainStage.timelineD.getTime()
+    if(ntime > 0){
+        mainStage.addAction(initObj)
+    }
     mainStage.addAction(res,true)
+    console.log(mainStage)
 })
 
 

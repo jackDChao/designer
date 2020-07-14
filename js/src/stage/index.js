@@ -716,12 +716,14 @@ class stage{
             if(e.target.nodeName == 'BUTTON'){
                 return 
             }
+            let flag = this.checkCanInAct(this.timelineD.getTime(),$(parent).attr('id'),this.animation.animationAction)
+            console.log(this.timelineD.getTime(),$(parent).attr('id'),this.animation.animationAction,)
             if($(parent).hasClass('moveItem') && showArr.some(ele=> $(ele).attr('id') === $(parent).attr('id'))){
                 $(parent).addClass('activeM')
                 $(parent).find('.buttons').remove()
                 // <span class="magic"><b class="topNum">1</b></span>
                 let buttonHtml = `<div class="buttons">
-                    <span class="magic"></span>
+                    <span class="magic"> ${ !flag ? '<b class="topNum">1</b>' : ''} </span>
                     <span class="change"></span>
                 </div>`
                 $(parent).append(buttonHtml)
@@ -888,7 +890,7 @@ class stage{
                 layer.msg('请选择动效并填写完整内容！')
                 return
             }
-            let startt = this.timelineD.getTime() < 0.02 ? 0.02 : this.timelineD.getTime()
+            let startt = this.timelineD.getTime()
             if(!this.checkCanInAct(startt,$(this.nowElement).attr('id'),this.animation.animationAction)){
                 layer.msg('当前角色已经有一个动效了')
                 return
@@ -968,21 +970,20 @@ class stage{
     getShowItem(){
         let items = $(this.$el).find('.moveItem').toArray()
         let filArr = items.filter(el=>{
-            console.log($(el).css('opacity'))
+            // console.log($(el).css('opacity'))
             return $(el).css('opacity') != '0'
         })
-        console.log(filArr)
+        // console.log(filArr)
         return filArr
         
     }
     checkCanInAct(time,target,obj){
-        console.log(time,time<0.01)
-        if(time<0.01){
-            return false
-        }
         if(Object.prototype.toString.call(obj) === '[object Object]'){
             console.log(obj[target])
-            if(obj[target].some(item=>item.startt === time)){
+            if(obj[target] && obj[target].some(item=>{
+                console.log(item.startt <= time && time <= item.startt + Number(item.duration))
+                return item.startt <= time && time <= item.startt + Number(item.duration) && !item.hasOwnProperty('isInit')
+            })){
                 return false
             }
         }
@@ -990,7 +991,7 @@ class stage{
     }
     addAction(obj,flag){
         if(flag){
-            obj.startt = this.timelineD.getTime() < 0.02 ? 0.02 : this.timelineD.getTime()
+            obj.startt = this.timelineD.getTime()
         }
         this.animation.addAction(obj)
     }

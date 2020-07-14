@@ -77,6 +77,7 @@ function dragBotItem(el,cb) {
                     targets:'#'+nowid,
                     left:nleft,
                     top:ntop,
+                    isInit:true,
                     opacity:1,
                     startt:0.01,
                     duration:0.01
