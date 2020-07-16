@@ -5,7 +5,15 @@
  * 动画的属性处理
  * 时间轴处理
  */
-/* 动画动作对象 animation  */
+/**
+ * 动画动作对象 animation  
+ *  
+ * @param targetType 代表元素目标类型 1-小水滴 2-素材 3-文字 4-图形
+ * @param dropActType 特指小水滴动作类型 例如 wave 挥手
+ * @param actionType 指元素动效 1-显示 2-隐藏 3-移动 4-闪烁
+ *  
+ */
+
 
 
 
@@ -50,6 +58,20 @@ class animation {
             this.animationAction[tr] = [nelObj]
         }
         this.initAnimate(this.animationAction)
+    }
+    deleteAction(time,target){
+        let obj = this.animationAction
+        let deleteAct
+        if(Object.prototype.toString.call(obj) === '[object Object]'){
+            obj[target].forEach((item, idx)=>{
+                if(item.startt <= time && time <= item.startt + Number(item.duration) && !item.hasOwnProperty('isInit')){
+                    console.log(idx)
+                    deleteAct = obj[target].splice(idx,1)
+                }
+            })
+        }
+        this.initAnimate(this.animationAction)
+        return deleteAct
     }
     addAnimate(obj) {
         let nelObj = JSON.parse(JSON.stringify(obj))

@@ -380,7 +380,7 @@
     <i class="iconfont icon-x rightX"></i>
     <span class="acts" data-c='1'>显示</span>
     <span class="acts" data-c='2'>隐藏</span>
-    <!-- <span class="acts" data-c='3'>移动</span> -->
+    <span class="acts" data-c='3'>移动</span>
     <!-- <span class="acts" data-c='4'>闪烁</span> -->
     <span class="acts disn" data-c='wave'>挥手</span>
     <span class="acts disn" data-c='stand'>站立</span>
@@ -391,7 +391,7 @@
         <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="单位（s）"
           class="layui-input durat">
       </div>
-      <!-- <div class="type2">
+      <div class="type2">
         <label for="">终点坐标x：</label>
         <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="单位（px）"
           class="layui-input finax">
@@ -400,10 +400,14 @@
         <label for="">终点坐标y：</label>
         <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="单位（px）"
           class="layui-input finay">
-      </div> -->
+      </div>
 
     </div>
-    <button class="saveAct">保存</button>
+    <div class="botbtns">
+      <button class="saveAct">添加</button>
+      <button class="deleteAct">删除</button>
+    </div>
+    
   </div>
 
   <div class="modal acttimeDiv">
@@ -426,6 +430,25 @@
         <label for="">文字内容：</label>
         <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="文字内容"
           class="layui-input textInfo">
+      </div>
+      <div>
+        <label for="">宽度：</label>
+        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="宽度"
+          class="layui-input textwidth">
+      </div>
+      <div>
+        <label for="">高度：</label>
+          <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="高度"
+            class="layui-input textheight">
+      </div>
+      <div>
+        <label for="">字体颜色：</label>
+        <div class="picker" id="color-picker"></div>
+      </div>
+      <div>
+        <label for="">字体大小：</label>
+          <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="字体大小"
+            class="layui-input textfonts">
       </div>
     </div>
     <button class="savedeft">设置</button>
@@ -468,7 +491,7 @@
   <script src="js/svg.draw.js" charset="utf-8"></script>
 
   <script src="js/lib/greensock-js/src/minified/TweenMax.min.js"> </script>
-
+  <script src="js/lib/colorpicker/colorpicker.js"> </script>
   <script type="text/javascript" src="js/util.js"></script>
   <script src="js/main.js" type="module" charset="utf-8"></script>
   <script>

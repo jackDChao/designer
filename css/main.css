@@ -167,10 +167,16 @@ html,body,.main-container{
 .moveItem .texti{
     width: 100%;
     height: 100%;
-    line-height: 40px;
-    display: block;
-    font-size: 22px;
-    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.picker {
+    width: 104px !important;
+    height: 30px !important;
+    cursor: pointer;
+    position: relative;
+    border: 1px solid #e6e6e6;
 }
 .stagelineD .listItem span{
     height:24px;
@@ -480,7 +486,7 @@ html,body,.main-container{
     left: 200px;
     top: 200px;
     width:198px;
-    height:325px;
+    height:auto;
     background:rgba(255,255,255,1);
     box-shadow:0px 2px 8px 0px rgba(31,72,50,1);
     border-radius:4px;
@@ -542,7 +548,7 @@ html,body,.main-container{
     width: 100% !important;
 }
 .actDiv{
-    height: 210px;
+    height: auto;
 }
 .acttimeDiv{
     height: 180px;
@@ -555,7 +561,7 @@ html,body,.main-container{
     align-items: center;
     justify-content: flex-end;
 }
-.saveAct,.savedeft,.savedefn,.saveActTime{
+.savedeft,.savedefn,.saveActTime{
     background: #02D8B5;
     margin: 0 auto;
     width: 120px;
@@ -568,4 +574,24 @@ html,body,.main-container{
     border-radius: 4px;
     color: white;
     cursor: pointer;
+}
+.botbtns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.deleteAct,.saveAct{
+    flex: 1;
+    margin: 10px;
+    background: #02D8B5;
+    font-size: 16px;
+    border-radius: 4px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+}
+.deleteAct{
+    display: none;
+    background: #EE6237;
 }

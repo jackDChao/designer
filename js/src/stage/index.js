@@ -11,6 +11,8 @@ import {timelineDom,timeActions} from "../timeline/index.js";
 let rect = document.getElementById('stageBg').getBoundingClientRect()
 let rectRuler = document.getElementById('timeRuler').getBoundingClientRect()
 
+
+
 // 实物图课程编排
 const defaultAni = {
     "item_1": [{
@@ -705,6 +707,14 @@ class stage{
         // this.addtotl(waterd)
         let that = this
 
+        //
+        var acolor = Colorpicker.create({
+            el: "color-picker",
+            color: "#000",
+            change: function (elem, hex) {
+                elem.style.backgroundColor = hex;
+            }
+        })
         $(document).on('mouseover', '.moveItem', (e)=>  {
             let showArr = that.getShowItem()
             let parent = $(e.target)
@@ -716,7 +726,7 @@ class stage{
             if(e.target.nodeName == 'BUTTON'){
                 return 
             }
-            let flag = this.checkCanInAct(this.timelineD.getTime(),$(parent).attr('id'),this.animation.animationAction)
+            let flag = this.checkCanInAct(this.timelineD.getTime(),$(parent).attr('id'))
             console.log(this.timelineD.getTime(),$(parent).attr('id'),this.animation.animationAction,)
             if($(parent).hasClass('moveItem') && showArr.some(ele=> $(ele).attr('id') === $(parent).attr('id'))){
                 $(parent).addClass('activeM')
@@ -746,7 +756,7 @@ class stage{
             console.log(this.noActionSet,$(".saveActTime").parent().find('.timeset').val())
             this.noActionSet.duration = Number($(".saveActTime").parent().find('.timeset').val())
             this.addAction(this.noActionSet)
-            this.timeActionList.addToTimeline(this.nameRev()+'移动缩放',this.noActionSet)
+            this.timeActionList.addToTimeline(this.nameRev()+'移动',this.noActionSet)
             $('.timeset').val('')
             $(".acttimeDiv").hide()
             this.noActionSet = null
@@ -797,13 +807,44 @@ class stage{
             nleft = parseInt($(nele).css('left')) < parseInt($('#stageBg').css('width'))/2 ? parseInt($(nele).css('left')) + parseInt($(nele).css('width')) + 20 + rect.left :parseInt($(nele).css('left')) - 20 - parseInt($(nele).css('width')) + rect.left ,
             ntop = parseInt($(nele).css('top')) - 30
             this.nowElement = nele
-            console.log(nele)
+            console.log(nele,this.timelineD.getTime(),$(nele).attr('id'))
+            let nact = this.findInAct(this.timelineD.getTime(),$(nele).attr('id'))
+            $('.actDiv .acts').removeClass('active')
+            $('.actDiv .durat').val('')
+            if(nact){
+                $('.deleteAct').show()
+                let acts = $('.actDiv .acts').toArray()
+                acts.forEach(item=>{
+                    if($(item).data('c') == nact.actionType){
+                        $(item).addClass('active')
+                    }
+                })
+                $('.actDiv .durat').val(nact.duration)
+            }else{
+                $('.deleteAct').hide()
+            }
             if($(nele).hasClass('deSvg')){
                 $('.disn').css('display','inline-flex')
             }else{
                 $('.disn').css('display','none')
             }
             $('.actDiv').css('left',nleft+'px').show()
+        })
+        // 删除动效
+        $(document).on('click', '.deleteAct', (e)=>  {
+            let that = this
+            layer.msg('确认删除该角色已经添加的动效吗？', {
+                time: 20000, //20s后自动关闭
+                btn: ['删除', '取消'],
+                yes: function(){
+                    that.deleteAct(that.timelineD.getTime(),$(that.nowElement).attr('id'))
+                    $('.actDiv').hide()
+                    layer.closeAll();
+                }
+                ,btn2: function(){
+                    layer.closeAll();
+                }
+            });
         })
 
         $(document).on('click', '.change', (e)=>  {
@@ -819,8 +860,15 @@ class stage{
                 $('.defnomDiv').find('.sw').val(parseInt($(nele).css('width')))
                 $('.defnomDiv').find('.sh').val(parseInt($(nele).css('height')))
             }else{
+                
                 $('.deftextDiv').css('left',nleft+'px').show()
                 $('.deftextDiv').find('.textInfo').val($(nele).find('.texti').text())
+
+                $('.deftextDiv').find('.textwidth').val(parseInt($(nele).css('width')))
+                $('.deftextDiv').find('.textheight').val(parseInt($(nele).css('height')))
+                // 设置字体颜色要通过创建颜色选取插件方法
+                acolor.setColorByInput($(nele).css('color'))
+                $('.deftextDiv').find('.textfonts').val(parseInt($(nele).css('font-size')))
             }
         })
 
@@ -849,7 +897,12 @@ class stage{
             if(!val){
                 layer.msg('请输入字符内容')
             }
-            $(this.nowElement).find('.texti').text(val)
+            let text = $(this.nowElement).find('.texti')
+            $(text).text(val)
+            $(this.nowElement).css('width',$(parent).find('.textwidth').val()+'px')
+            .css('height',$(parent).find('.textheight').val()+'px')
+            .css('font-size',$(parent).find('.textfonts').val()+'px')
+            .css('color',$(parent).find('.picker').css('background-color'))
             $(parent).hide()
         })
         $(document).on('click', '.savedefn', (e)=>  {
@@ -870,7 +923,7 @@ class stage{
         })
 
         $(document).on('click', '.saveAct', (e)=>  {
-            let parent = $(e.target).parent()
+            let parent = $(e.target).parent().parent()
             let fobj = {
                 1:'show',
                 2:'hide',
@@ -879,7 +932,6 @@ class stage{
             }
             let actargetType = $(parent).find('.active')
             let durat = $(parent).find('.durat').val() // 持续时间
-            console.log(durat)
             let finax = $(parent).find('.finax').val() // 终点x
             let finay = $(parent).find('.finay').val() // 终点y
             if(actargetType.length == 0 || !durat){
@@ -903,6 +955,7 @@ class stage{
             if($(this.nowElement).hasClass('deSvg')){
                 actobj.targetType = '1'
             }
+            actobj.actionType = $(actargetType).data('c')
             switch($(actargetType).data('c')) {
                 case 2:
                     actobj.opacity = 0
@@ -920,6 +973,7 @@ class stage{
                 default:
                     actobj.dropActType = $(actargetType).data('c')
            }
+           console.log(actobj)
            this.addAction(actobj)
            
            this.timeActionList.addToTimeline(this.nameRev()+$(actargetType).text(),actobj)
@@ -977,7 +1031,8 @@ class stage{
         return filArr
         
     }
-    checkCanInAct(time,target,obj){
+    checkCanInAct(time,target){
+        let obj = this.animation.animationAction
         if(Object.prototype.toString.call(obj) === '[object Object]'){
             console.log(obj[target])
             if(obj[target] && obj[target].some(item=>{
@@ -987,7 +1042,22 @@ class stage{
                 return false
             }
         }
-        return true
+        return true 
+    }
+    findInAct(time,target){
+        let obj = this.animation.animationAction
+        if(Object.prototype.toString.call(obj) === '[object Object]'){
+            return obj[target].find(item=>{
+                return item.startt <= time && time <= item.startt + Number(item.duration) && !item.hasOwnProperty('isInit')
+            })
+        }else{
+            return false 
+        }
+    }
+    deleteAct(time,target){
+        let deact = this.animation.deleteAction(time,target)
+        console.log(deact)
+        this.timeActionList.deleteTimeDom(deact[0])
     }
     addAction(obj,flag){
         if(flag){

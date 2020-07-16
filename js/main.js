@@ -15,17 +15,8 @@ let mainStage = new stage($("#stageBg"))
 // }, 10000);
 
 // 初始化拖拽实例
-dragBotItem('dragItem', (res,dom) => {
-    let initObj = JSON.parse(JSON.stringify(res))
-    initObj.startt = 0 
-    initObj.opacity = 0
-    console.log(mainStage.timelineD.getTime())
-    let ntime = mainStage.timelineD.getTime()
-    if(ntime > 0){
-        mainStage.addAction(initObj)
-    }
-    mainStage.addAction(res,true)
-    console.log(mainStage)
+dragBotItem('dragItem', res => {
+    formTime(res)
 })
 
 
@@ -41,11 +32,11 @@ $(document).on('click', '.leftMain div', (e) => {
     source.init($(".dragList"), $(parent).data('type'))
     if($(".dragList"), $(parent).data('type') === 1){
         dragBotItem('deSvg', res => {
-            mainStage.addAction(res)
+            formTime(res)
         })
     }else{
         dragBotItem('dragItem', res => {
-            mainStage.addAction(res)
+            formTime(res)
         })
     }
     
@@ -177,3 +168,17 @@ $(document).on('click', '.creatSvg', (e) => {
     })
 })
 
+
+// 抽取公共方法
+function formTime(res){
+    let initObj = JSON.parse(JSON.stringify(res))
+    initObj.startt = 0 
+    initObj.opacity = 0
+    console.log(mainStage.timelineD.getTime())
+    let ntime = mainStage.timelineD.getTime()
+    if(ntime > 0){
+        mainStage.addAction(initObj)
+    }
+    mainStage.addAction(res,true)
+    console.log(mainStage)
+}
