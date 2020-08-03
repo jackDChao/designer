@@ -1,0 +1,73 @@
+.topTitle{
+    background:rgba(0,0,0,1);
+    box-shadow:0px 1px 16px 0px rgba(0,0,0,0.2);
+    opacity:0.5;
+    color: white;
+}
+.my_lesson{
+    float: right;
+    position: absolute;
+    right: 160px;
+    top: 10px;
+    height:31px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login_resigst{
+    position: absolute;
+    right: 30px;
+    border-radius:4px;
+    font-size: 10px;
+    opacity:0.5;
+    top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:105px;
+    height:31px;
+    border:1px solid rgba(255,255,255,1);
+}
+.center_row{
+    margin: 0 auto;
+    max-width: 1250px;
+}
+.center_row p{
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+.create_btn{
+    width:102px;
+    height:46px;
+    background:rgba(216,216,216,1);
+    border:1px solid rgba(151,151,151,1)
+}
+.lessons_list{
+    display: block;
+    overflow: hidden;
+}
+.lesson_item{
+    width: 400px;
+    margin-top: 10px;
+    float: left;
+    height: 253px;
+    margin-right: 14px;
+    border-radius:4px;
+    border:1px solid rgba(230,230,230,1)
+}
+.lesson_item p{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.lesson_item p:first-child{
+    height:162px;
+    background:#E7E7E7;
+}  
+.lesson_item p:last-child{
+    height:91px;
+    background:white;
+} 
