@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的课程</title>
+    <title>我的系列课</title>
     <link rel="stylesheet" href="./css/iconfont/iconfont.css">
     <link rel="stylesheet" href="./js/lib/boot/bootstrap.css">
     <link rel="stylesheet" href="./css/main.css" media="all">
@@ -29,16 +29,28 @@
                     新建 <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
+                    <li><a class="addcourse">新增系列课</a></li>
                     <li><a class="addlesson">新增课程</a></li>
                 </ul>
             </div>
             <p>
-                <label for="" class="coursename"></label>
+                <label for="">我的系列课</label>
             </p>
             <div class="lessons_list">
                 
             </div>
         </div>
+    </div>
+    <div id="course_tag">
+        <div>
+            <input type="text" name="title" autocomplete="off" placeholder="系列课名称"
+              class="layui-input topinput coursename">
+          </div>
+          <div>
+            <button type="button" class="btn btn-default tocourse">
+                保存
+            </button>
+          </div>
     </div>
     <div id="lesson_tag">
         <div>
@@ -50,16 +62,15 @@
           </div>
           <div>
             <select class="form-control courselist" name="city" lay-verify="required">
-                
               </select>
           </div>
           <button type="button" class="btn btn-default tolesson">
-            保存
+            保存并进入设计器
         </button>
     </div>
     <script src="./js/jquery.min.js" charset="utf-8"></script>
     <script src="./js/lib/boot/bootstrap.min.js" charset="utf-8"></script>
     <script type="text/javascript" src="./js/lib/layui/layer/layer.js"></script>
-    <script type="text/javascript" src="./js/extra/mylesson.js"></script>
+    <script type="text/javascript" src="./js/extra/mycourse.js"></script>
 </body>
 </html>

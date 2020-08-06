@@ -13,7 +13,11 @@
     font-size: 10px;
     display: flex;
     align-items: center;
+    cursor: pointer;
     justify-content: center;
+}
+.login{
+    cursor: pointer;
 }
 .login_resigst{
     position: absolute;
@@ -38,9 +42,14 @@
     display: flex;
     align-items: center;
 }
+.center_row .dropdlist{
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
 .create_btn{
-    width:102px;
-    height:46px;
+    width: 80px;
+    height: 36px;
     background:rgba(216,216,216,1);
     border:1px solid rgba(151,151,151,1)
 }
@@ -50,12 +59,19 @@
 }
 .lesson_item{
     width: 400px;
-    margin-top: 10px;
+    margin-bottom: 20px;
     float: left;
     height: 253px;
     margin-right: 14px;
     border-radius:4px;
     border:1px solid rgba(230,230,230,1)
+}
+.lessonit{
+    width: 228px !important;
+    height: 200px !important;
+}
+.lesson_item{
+    cursor: pointer;
 }
 .lesson_item p{
     width: 100%;
@@ -64,10 +80,46 @@
     justify-content: center;
 }
 .lesson_item p:first-child{
-    height:162px;
+    height:calc(100% - 80px);
     background:#E7E7E7;
 }  
 .lesson_item p:last-child{
-    height:91px;
+    height:80px;
     background:white;
 } 
+#course_tag{
+    width: 350px;
+    padding: 20px 0;
+    height: 250px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 10px;
+}
+#course_tag>div{
+    height: 40px;
+    width: 100%;
+}
+.topinput{
+    position: absolute;
+    top:20px;
+    width: calc(100% - 40px) !important;
+    left: 20px;
+}
+.tocourse,.tolesson{
+    position: absolute;
+    bottom: 20px;
+    width: 154px;
+    height: 42px;
+    left: calc(50% - 77px);
+}
+#lesson_tag,#course_tag{
+    display: none;
+}
+#lesson_tag>div{
+    margin-top: 10px;
+    padding: 0 10px;
+}
+.noborder{
+    border: none !important;
+}

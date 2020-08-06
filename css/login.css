@@ -1,6 +1,7 @@
 html,body,.mainCon{
     width: 100%;
     height: 100%;
+    background: #f7f7f7;
 }
 div,p{
     box-sizing: border-box;
@@ -18,6 +19,7 @@ button{
     position: absolute;
     left: calc(50% - 237px);
     top: calc(50% - 248px);
+    background-color: white;
 }
 .login_div h3{
     font-size: 24px;
@@ -34,8 +36,9 @@ button{
 .leftLabel{
     position: absolute;
     font-size: 12px;
-    left: 0;
+    left: 10px;
     color: #000000;
+    opacity: 0.3;
     height: 40px;
     width: 60px;
     display: flex;

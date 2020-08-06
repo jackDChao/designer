@@ -54,6 +54,11 @@ html,body,.main-container{
     font-family: monospace;
     padding-left: 80px;
 }
+.topTitle h4{
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+}
 .bottomMain{
     height: calc(100% - 56px);
     width: 100%;
