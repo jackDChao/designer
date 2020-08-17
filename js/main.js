@@ -167,6 +167,89 @@ $(document).on('click', '.creatSvg', (e) => {
         console.log($(parentsvg))
     })
 })
+// 保存课程
+$(document).on('click', '.savelesson', (e) => {
+    console.log(mainStage)
+    if(!getQueryString('courseid') || !getQueryString('lessonid')){
+        layer.msg('课程信息不完善，请检查来源！')
+        return 
+    }
+    let json = {
+        animationObj:mainStage.animation.animationObj,
+        animationAction:mainStage.animation.animationAction
+    }
+    let postdata = {
+        "json": JSON.stringify(json),
+        "username": "admin",
+        "courseid": getQueryString('courseid'),
+        "lessonid":getQueryString('lessonid')
+    }
+    $.ajax({
+        url:`https://service-0w9ndseb-1251270507.sh.apigw.tencentcs.com/createlesson`,
+        type:'post',
+        contentType: 'application/json',
+        data:JSON.stringify(postdata),
+        dataType:'json',
+        success:function(result){
+            console.log(result)
+            if(result == 'success'){
+                layer.msg('保存成功')
+            }
+        },
+        dataFilter:function(result,b){
+            if(result == 'success'){
+                layer.msg('保存成功')
+                setTimeout(() => {
+                    layer.closeAll()
+                }, 1500);
+            }
+        }
+    });
+})
+
+getlessonbyid()
+
+function getlessonbyid(){
+    let lessonid = getQueryString('lessonid')
+    let courseid = getQueryString('courseid')
+    // $.ajax({url:`https://service-0w9ndseb-1251270507.sh.apigw.tencentcs.com/getlessonbyid?lessonid=${lessonid}`,success:function(result){
+    //     console.log(result)
+    //     if(result){
+            
+    //     }
+    // }});
+    $.ajax({url:`https://service-0w9ndseb-1251270507.sh.apigw.tencentcs.com/getlessons?username=admin&courseid=${courseid}`,success:function(result){
+        console.log(result)
+        if(result){
+            let html = ''
+            result.forEach(element => {
+                if(element._id == lessonid){
+                    console.log(element)
+                    if(element.data){
+                        let animation = JSON.parse(element.data)
+                        if(animation.animationObj){
+                            for(let x in animation.animationObj){
+                                html += `<div class="moveItem"
+                                style="opacity: 0;background-image: url('${animation.animationObj[x].imgurl}');position: absolute;"
+                                id="${x.substring(1,x.length)}" >
+                                <div class="buttons">
+                                    <span class="magic"></span>
+                                    <span class="change"></span>
+                                </div>
+                              </div>`
+                            }
+                            console.log(html)
+                            $('#stageBg').html(html)
+                            mainStage.animation.animationAction = animation.animationAction
+                            mainStage.animation.initAnimate(animation.animationAction)
+                        }
+                    }
+                    
+                }
+            });
+        }
+    }});
+}
 
 
 // 抽取公共方法
@@ -181,4 +264,10 @@ function formTime(res){
     }
     mainStage.addAction(res,true)
     console.log(mainStage)
+}
+function getQueryString(key) {
+    var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return null;
 }

@@ -10,7 +10,7 @@ $(function(){
     // 课程指向
     $(document).on('click','.lesson_item',function(){
         console.log($(this).data('id'))
-        location.href = `./designer.html?courseid=${$(this).data('courseid')}&lessonid=${$(this).data('id')}`
+        location.href = `./lessondetail.html?courseid=${$(this).data('courseid')}&lessonid=${$(this).data('id')}`
         return false
     });
     // 添加课程
@@ -88,10 +88,10 @@ $(function(){
                 result.forEach(element => {
                     html+= `<div class="lesson_item lessonit" data-id="${element._id}" data-courseid="${element.course}">
                         <p>
-                            课程封面图
+                            <img class="lesson_img" src="./images/lesson/gy.png">
                         </p>
                         <p>
-                            ${element.name}
+                            ${element.name || element.lessonname}
                         </p>
                     </div>`
                 });

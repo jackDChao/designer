@@ -771,6 +771,7 @@ class stage{
         // 绑定事件
         $(document).on('click', '#playStage', ()=> {
             console.log(this.animation.animationAction)
+            console.log(this.animation.animationObj)
             // this.animation.initAnimate(this.animation.animationAction)
             $("#pauseStage").css('display','inline-flex')
             $("#resumeStage").css('display','none')
@@ -787,10 +788,10 @@ class stage{
             this.timelineD.tlRestart()
         })
         $(document).on('click', '#pauseStage', (e)=>  {
-                this.animation.pause()
-                this.timelineD.tlStop()
-                $(e.target).css('display','none')
-                $("#resumeStage").css('display','inline-flex')
+            this.animation.pause()
+            this.timelineD.tlStop()
+            $(e.target).css('display','none')
+            $("#resumeStage").css('display','inline-flex')
         })
         $(document).on('click', '#resumeStage', (e)=>  {
             this.animation.resume()
@@ -1060,6 +1061,12 @@ class stage{
         this.timeActionList.deleteTimeDom(deact[0])
     }
     addAction(obj,flag){
+        console.log(obj)
+        let imgurl = $(obj.targets).css('backgroundImage').split('(')[1].split(')')[0]
+        imgurl = imgurl.substring(1,imgurl.length-1)
+        this.animation.animationObj[obj.targets] = {
+            imgurl:imgurl
+        }
         if(flag){
             obj.startt = this.timelineD.getTime()
         }

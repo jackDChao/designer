@@ -75,6 +75,8 @@ function dragBotItem(el,cb) {
                 console.log($(newDv))
                 let ntarget = {
                     targets:'#'+nowid,
+                    width:parseInt($(newDv).css('width')),
+                    height:parseInt($(newDv).css('height')),
                     left:nleft,
                     top:ntop,
                     isInit:true,

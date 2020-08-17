@@ -129,10 +129,10 @@ $(function(){
             if(result){
                 let html = ''
                 let selecthtml = ''
-                result.forEach(element => {
+                result.forEach((element,idx) => {
                     html+= `<div class="lesson_item" data-id="${element._id}">
                         <p>
-                            课程封面图
+                            <img class="lesson_img" src="./images/lesson/${idx % 2 == 0 ? 'ty1' : 'ty2'}.png">
                         </p>
                         <p>
                             ${element.coursename}
