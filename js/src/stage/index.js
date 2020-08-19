@@ -8,9 +8,6 @@
 /* 主舞台 stage  */
 import animation from '../animation/index.js'
 import {timelineDom,timeActions} from "../timeline/index.js";
-let rect = document.getElementById('stageBg').getBoundingClientRect()
-let rectRuler = document.getElementById('timeRuler').getBoundingClientRect()
-
 
 
 // 实物图课程编排
@@ -694,27 +691,52 @@ const waterd = {
 
 // 记录全部动画动作
 class stage{
-    constructor(el) {
-        this.timelineD = new timelineDom($(".timeLineS"))
+    constructor(el,fromdata) {
         this.$el = $(el)
         this.nowElement = null
         this.animation = new animation()
         this.timeActionList = new timeActions('.topline')
-        this.animation.animationAction = {}
+        this.fromdata = fromdata
+        if(!fromdata){
+            this.rect = document.getElementById('stageBg').getBoundingClientRect()
+            this.rectRuler = document.getElementById('timeRuler').getBoundingClientRect()
+            this.timelineD = new timelineDom($(".timeLineS"))
+            this.animation.animationAction = {}
+            this.animation.seek(0.1)
+            this.noActionSet = null
+            //
+            var acolor = Colorpicker.create({
+                el: "color-picker",
+                color: "#000",
+                change: function (elem, hex) {
+                    elem.style.backgroundColor = hex;
+                }
+            })
+            dragStageItem('moveItem',(res,ele)=>{
+                this.nowElement = ele
+                this.noActionSet = res
+                let startt = this.timelineD.getTime() < 0.02 ? 0.02 : this.timelineD.getTime()
+                if(!this.checkCanInAct(startt,$(this.nowElement).attr('id'),this.animation.animationAction)){
+                    layer.msg('当前角色已经有一个动效了')
+                    return
+                }
+                this.noActionSet.startt = startt
+                $(".acttimeDiv").show()
+            })
+        }else{
+            this.animation.initAnimate(fromdata)
+            // this.animation.seek(0.1)
+
+        }
+        
+       
+        
         // this.animation.initAnimate(waterd)
-        this.animation.seek(0.1)
-        this.noActionSet = null
+        
         // this.addtotl(waterd)
         let that = this
 
-        //
-        var acolor = Colorpicker.create({
-            el: "color-picker",
-            color: "#000",
-            change: function (elem, hex) {
-                elem.style.backgroundColor = hex;
-            }
-        })
+        
         $(document).on('mouseover', '.moveItem', (e)=>  {
             let showArr = that.getShowItem()
             let parent = $(e.target)
@@ -740,17 +762,7 @@ class stage{
             }
         })
 
-        dragStageItem('moveItem',(res,ele)=>{
-            this.nowElement = ele
-            this.noActionSet = res
-            let startt = this.timelineD.getTime() < 0.02 ? 0.02 : this.timelineD.getTime()
-            if(!this.checkCanInAct(startt,$(this.nowElement).attr('id'),this.animation.animationAction)){
-                layer.msg('当前角色已经有一个动效了')
-                return
-            }
-            this.noActionSet.startt = startt
-            $(".acttimeDiv").show()
-        })
+       
 
         $(document).on('click', '.saveActTime', (e)=>  {
             console.log(this.noActionSet,$(".saveActTime").parent().find('.timeset').val())
@@ -778,24 +790,32 @@ class stage{
             this.animation.pause()
             setTimeout(() => {
                 this.animation.restart()
-                this.timelineD.tlRestart()
+                if(!this.fromdata){
+                    this.timelineD.tlRestart()
+                }
             }, 100);
             
         })
         
         $(document).on('click', '#replayStage', ()=> {
             this.animation.restart()
-            this.timelineD.tlRestart()
+            if(!this.fromdata){
+                this.timelineD.tlRestart()
+            }
         })
         $(document).on('click', '#pauseStage', (e)=>  {
             this.animation.pause()
-            this.timelineD.tlStop()
+            if(!this.fromdata){
+                this.timelineD.tlStop()
+            }
             $(e.target).css('display','none')
             $("#resumeStage").css('display','inline-flex')
         })
         $(document).on('click', '#resumeStage', (e)=>  {
             this.animation.resume()
-            this.timelineD.tlmove()
+            if(!this.fromdata){
+                this.timelineD.tlmove()
+            }
             $(e.target).css('display','none')
             $("#pauseStage").css('display','inline-flex')
         })
@@ -805,7 +825,7 @@ class stage{
         $(document).on('click', '.magic', (e)=>  {
             $('.modal').hide()
             let nele = $(e.target).parent().parent(),
-            nleft = parseInt($(nele).css('left')) < parseInt($('#stageBg').css('width'))/2 ? parseInt($(nele).css('left')) + parseInt($(nele).css('width')) + 20 + rect.left :parseInt($(nele).css('left')) - 20 - parseInt($(nele).css('width')) + rect.left ,
+            nleft = parseInt($(nele).css('left')) < parseInt($('#stageBg').css('width'))/2 ? parseInt($(nele).css('left')) + parseInt($(nele).css('width')) + 20 +  this.rect.left :parseInt($(nele).css('left')) - 20 - parseInt($(nele).css('width')) +  this.rect.left ,
             ntop = parseInt($(nele).css('top')) - 30
             this.nowElement = nele
             console.log(nele,this.timelineD.getTime(),$(nele).attr('id'))
@@ -851,7 +871,7 @@ class stage{
         $(document).on('click', '.change', (e)=>  {
             $('.modal').hide()
             let nele = $(e.target).parent().parent(),
-            nleft = parseInt($(nele).css('left')) + parseInt($(nele).css('width')) + 20 + rect.left,
+            nleft = parseInt($(nele).css('left')) + parseInt($(nele).css('width')) + 20 +  this.rect.left,
             ntop = parseInt($(nele).css('top')) - 30
             this.nowElement = nele
             if($(nele).data('type') == 2 || $(nele).data('type') == 1){
@@ -887,7 +907,7 @@ class stage{
             $(e.target).parent().hide()
         })
         $(document).on('click', '#timeRuler', (e)=>  {
-            let left = e.clientX - rectRuler.left + 100
+            let left = e.clientX - this.rectRuler.left + 100
             this.timelineD.tlLeft(left)
             this.animation.seek(this.timelineD.tlSeek())
         })

@@ -25,12 +25,17 @@
             </div>
         </div>
     </div>
-    <div class="play_main">
+    <div class="play_main" id="stage">
 
     </div>
     <span class="toslesson">编辑该课程</span>
     <div class="tool_bar">
-        <i class="iconfont icon-bofang" id="play_movie"></i>
+        <i class="iconfont icon-bofang" id="playStage" style="color:white;font-size:20px;margin-left: 50px;"></i>
+        <span class="pauseicon" id="resumeStage" style="color:white;font-size:20px;margin-left: 20px;border:none;"></span>
+        <span class="iconfont icon-zantingtingzhi stopicon" id="pauseStage" style="color:white;font-size:20px;border:none;margin-left: 20px;" data-status="playing"></span>
+    </div>
+    <div id="timeRuler" class="timeRuler" style="left: 0px; width: 1690px;display: none;">
+
     </div>
     <script src="./js/jquery.min.js" charset="utf-8"></script>
     <script src="./js/lib/boot/bootstrap.min.js" charset="utf-8"></script>
@@ -42,6 +47,7 @@
     <script src="js/lib/greensock-js/src/minified/TweenMax.min.js"> </script>
     <script src="js/lib/colorpicker/colorpicker.js"> </script>
     <script type="text/javascript" src="js/util.js"></script>
-    <script type="text/javascript" src="./js/extra/lessondetail.js"></script>
+    <!-- <script type="text/javascript" src="./js/extra/lessondetail.js"></script> -->
+    <script src="js/playmain.js" type="module" charset="utf-8"></script>
 </body>
 </html>

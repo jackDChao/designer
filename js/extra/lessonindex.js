@@ -19,6 +19,12 @@ $(function(){
         location.href = `./mycourse.html`
         return false
     });
+    // 系列课指向
+    $(document).on('click','.lesson_item',function(){
+        console.log($(this).data('id'))
+        location.href = `./mylesson.html?courseid=${$(this).data('id')}`
+        return false
+    });
 
     function getQueryString(key) {
         var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)", "i");
