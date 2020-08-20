@@ -181,7 +181,7 @@ function dragStageItem(el,cb) {
                     left:nleft,
                     top:ntop,
                     opacity:1,
-                    startt:0.01,
+                    startt:0,
                     duration:0.01
                 }
                 if($(newDv).hasClass('deSvg')){
@@ -201,6 +201,6 @@ function dragStageItem(el,cb) {
  * 设置元素id 
  */
 function setOwnId(){
-    allItemNum++
-    return 'item_'+allItemNum
+    let num = parseInt($('.moveItem').length) + 2
+    return 'item_'+num
 }

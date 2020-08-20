@@ -240,8 +240,10 @@ function getlessonbyid(){
                             }
                             console.log(html)
                             $('#stageBg').html(html)
+                            mainStage.animation.animationObj = animation.animationObj
                             mainStage.animation.animationAction = animation.animationAction
                             mainStage.animation.initAnimate(animation.animationAction)
+                            mainStage.addtotl(animation.animationAction)
                         }
                     }
                     

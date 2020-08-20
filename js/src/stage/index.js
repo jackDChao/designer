@@ -725,8 +725,6 @@ class stage{
             })
         }else{
             this.animation.initAnimate(fromdata)
-            // this.animation.seek(0.1)
-
         }
         
        
@@ -1006,7 +1004,7 @@ class stage{
         for(let x in obj){
             obj[x].forEach(item=>{
                 if(item.startt && item.startt > 0.01){
-                    let type = item.actionType || ''
+                    let type = item.actionType || '3'
                     let targetType = item.targetType || ''
                     switch(type){
                         case '1':
