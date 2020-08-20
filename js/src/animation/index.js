@@ -86,7 +86,6 @@ class animation {
                 this.waterDrop.pause()
             },nelObj.startt+nelObj.duration,'sequence')
         }
-        console.log(nelObj.targets, nelObj.duration, nelObj)
         this.animateTL.add(
                 TweenLite.to(nelObj.targets, nelObj.duration, nelObj), nelObj.startt,'sequence')
     }
