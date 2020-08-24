@@ -653,3 +653,105 @@ html,body,.main-container{
     justify-content: center;
     cursor: pointer;
 }
+html,body,.mainCon{
+    width: 100%;
+    height: 100%;
+    background: #f7f7f7;
+}
+.mainCon{
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+    background: rgba(0,0,0,0.5);
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+div,p{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+button{
+    margin: 0;
+    padding: 0;
+}
+.login_div{
+    width: 475px;
+    padding: 150px  54px 0px 80px;
+    height: 495px;
+    position: absolute;
+    left: calc(50% - 237px);
+    top: calc(50% - 248px);
+    background: url('../images/ex/loginbg.png') no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+}
+.login_div h3{
+    font-size: 24px;
+    display: flex;
+    width: 260px;
+    justify-content: center;
+    align-items: center;
+    height: 128px;
+}
+.login_div input{
+    border: none;
+    background:rgba(255,255,255,1);
+    border-bottom:1px solid #8B572A;
+    border-radius: 0;
+}
+.login_div p{
+    height: 52px;
+    width: 260px;
+    padding:6px 0px;
+    position: relative;
+}
+.close_btn{
+    position: absolute;
+    bottom: -50px;
+    width:64px;
+    left: 178px;
+    height:64px;
+    cursor: pointer;
+    background: url('../images/ex/close.png') no-repeat;
+    background-size: 80% 80%;
+    background-position: center;
+}
+.leftLabel{
+    position: absolute;
+    font-size: 12px;
+    left: 10px;
+    color: #000000;
+    opacity: 0.3;
+    height: 40px;
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.layui-icon{
+    margin-left: 4px;
+}
+.login_btn_p{
+    margin-top: 64px;
+}
+.login_btn{
+    width:260px;
+    height:40px;
+    background:linear-gradient(90deg,rgba(5,211,253,1) 0%,rgba(2,167,249,1) 100%);
+    border-radius:4px;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+.btn_p{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size:12px;
+    font-family:PingFangSC-Regular,PingFang SC;
+    font-weight:400;
+    color:rgba(24,144,255,1);
+}

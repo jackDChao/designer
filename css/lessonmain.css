@@ -9,6 +9,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background: url('../images/ex/indexbg.png') no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
 }
 .wsearch{
     width: 500px !important;
