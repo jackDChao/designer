@@ -669,31 +669,16 @@ const defaultAni = {
         "duration":  0.001
     }],
 }
-const waterd = {
-    "item_1": [{
-        "targets": "#item_1",
-        "left": 370,
-        targetType:'2',
-        "top": 350,
-        "opacity": 1,
-        "startt": 0.02,
-        "duration":  0.01
-    },{
-        "targets": "#item_1",
-        "left": 370,
-        targetType:'2',
-        "top": 350,
-        "opacity": 0,
-        "startt": 2,
-        "duration":  2
-    }]
-}
 
 // 记录全部动画动作
 class stage{
     constructor(el,fromdata) {
         this.$el = $(el)
         this.nowElement = null
+        this.nowActOpen = {
+            id:null,
+            isOpen:false
+        }
         this.animation = new animation()
         this.timeActionList = new timeActions('.topline')
         this.fromdata = fromdata
@@ -714,14 +699,21 @@ class stage{
             })
             dragStageItem('moveItem',(res,ele)=>{
                 this.nowElement = ele
-                this.noActionSet = res
-                let startt = this.timelineD.getTime() < 0.02 ? 0.02 : this.timelineD.getTime()
-                if(!this.checkCanInAct(startt,$(this.nowElement).attr('id'),this.animation.animationAction)){
-                    layer.msg('当前角色已经有一个动效了')
-                    return
+                console.log(res)
+                let nid = $(this.nowElement).attr('id')
+                if(this.nowActOpen.id == $(this.nowElement).attr('id') && this.nowActOpen.isOpen){
+                    this.noActionSet = res
+                    let startt = this.timelineD.getTime() < 0.02 ? 0.02 : this.timelineD.getTime()
+                    if(!this.checkCanInAct(startt,$(this.nowElement).attr('id'),this.animation.animationAction)){
+                        layer.msg('当前角色已经有一个动效了')
+                        return
+                    }
+                    this.noActionSet.startt = startt
+                    $(".acttimeDiv").show()
+                }else{
+                    console.log(this.animation.animationAction)
+                    this.animation.updateaction(nid,res)
                 }
-                this.noActionSet.startt = startt
-                $(".acttimeDiv").show()
             })
         }else{
             this.animation.initAnimate(fromdata)
@@ -746,13 +738,14 @@ class stage{
             if(e.target.nodeName == 'BUTTON'){
                 return 
             }
+            let activeLight = this.nowActOpen.id == $(parent).attr('id') && this.nowActOpen.isOpen
             let flag = this.checkCanInAct(this.timelineD.getTime(),$(parent).attr('id'))
-            console.log(this.timelineD.getTime(),$(parent).attr('id'),this.animation.animationAction,)
             if($(parent).hasClass('moveItem') && showArr.some(ele=> $(ele).attr('id') === $(parent).attr('id'))){
                 $(parent).addClass('activeM')
                 $(parent).find('.buttons').remove()
                 // <span class="magic"><b class="topNum">1</b></span>
                 let buttonHtml = `<div class="buttons">
+                    <span class="light ${ activeLight ? 'active' : ''}"></span>
                     <span class="magic"> ${ !flag ? '<b class="topNum">1</b>' : ''} </span>
                     <span class="change"></span>
                 </div>`
@@ -818,7 +811,14 @@ class stage{
             $("#pauseStage").css('display','inline-flex')
         })
        
-        
+        // 开启动效编辑
+        $(document).on('click', '.light', (e)=>  {
+            let nele = $(e.currentTarget).parent().parent()
+            this.nowElement = nele
+            $(e.currentTarget).toggleClass('active')
+            this.nowActOpen.id = $(nele).attr('id')
+            this.nowActOpen.isOpen = $(e.currentTarget).hasClass('active')
+        })
 
         $(document).on('click', '.magic', (e)=>  {
             $('.modal').hide()
@@ -1053,9 +1053,7 @@ class stage{
     checkCanInAct(time,target){
         let obj = this.animation.animationAction
         if(Object.prototype.toString.call(obj) === '[object Object]'){
-            console.log(obj[target])
             if(obj[target] && obj[target].some(item=>{
-                console.log(item.startt <= time && time <= item.startt + Number(item.duration))
                 return item.startt <= time && time <= item.startt + Number(item.duration) && !item.hasOwnProperty('isInit')
             })){
                 return false

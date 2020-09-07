@@ -36,10 +36,15 @@ class animation {
         this.waterObjList = [] // 记录小水滴动作状态
     }
     initAnimate(obj) {
+        this.animateTL = new TimelineLite({
+            paused: true
+        })
         if (Object.prototype.toString.call(obj) === '[object Object]') {
             Object.keys(obj).forEach((item,idx) => {
+                console.log(idx, obj[item][0].targetType == '1')
                 if(idx == 0 && obj[item][0].targetType == '1'){
                     this.waterDrop = new waterDrop()
+                    console.log(this.waterDrop)
                     this.waterDrop.initAnimate('demoCanvas')
                     this.waterObjList = obj[item]
                 }
@@ -48,6 +53,17 @@ class animation {
                 })
             })
         }
+    }
+    updateaction(id,option){
+        console.log(this.animationAction[id][0],option)
+        let nact1 = this.animationAction[id][0]
+        nact1.width = option.width || nact1.width
+        nact1.height = option.height || nact1.height
+        nact1.left = option.left || nact1.left
+        nact1.top = option.top || nact1.top
+        nact1.startt = 0.01
+        console.log(this.animationAction[id])   
+        this.initAnimate(this.animationAction)
     }
     addAction(obj) {
         let nelObj = JSON.parse(JSON.stringify(obj))
@@ -74,6 +90,7 @@ class animation {
         return deleteAct
     }
     addAnimate(obj) {
+        console.log(this.waterDro)
         let nelObj = JSON.parse(JSON.stringify(obj))
         if(nelObj.targetType && nelObj.targetType === '1' && nelObj.hasOwnProperty('dropActType')){
             console.log(nelObj)

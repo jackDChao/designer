@@ -39,7 +39,7 @@ html,body,.main-container{
     width: 2px;
     top: 0px;
     background: #F6582A;
-    height: 100px;
+    height: 120px;
     z-index: 9;
 }
 .dragItem:hover,.creatSvg:hover{
@@ -68,7 +68,7 @@ html,body,.main-container{
     width: 100%;
 }
 .topMainShow{
-    height: calc(100% - 100px);
+    height: calc(100% - 120px);
     width: 100%;
 }
 .leftMain{
@@ -240,7 +240,7 @@ html,body,.main-container{
     background-position: center;
 }
 .timelineD,.TimelineRuler{
-    height: 30px;
+    height: 50px;
     position: relative;
 }
 
@@ -251,12 +251,32 @@ html,body,.main-container{
     position: relative;
     height: 10px;
     position: absolute;
-    top: 10px;
+    top: 30px;
     width: 100% !important;
     align-items: center;
     cursor: pointer;
 }
-
+.toptime{
+    display: block;
+    height: 30px;
+    overflow: hidden;
+    flex-wrap: nowrap;
+}
+.timetag{
+    width: 50px;
+    text-align: left;
+    float: left;
+    height: 30px;
+    margin-top:6px;
+    color: #000;
+    position: relative;
+}
+.timetag i{
+    position: absolute;
+    left: -17px;
+    font-style: normal;
+    color: #aaa;
+}
 .timeRuler .ruleItem {
     width: 80px;
     display: flex;
@@ -323,11 +343,11 @@ html,body,.main-container{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100px;
+    height: 120px;
 }
 .toptool{
     width: 100%;
-    height: 40px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -463,6 +483,12 @@ html,body,.main-container{
 }
 .magic{
     background-image: url(../images/icons/magic.png);
+}
+.light{
+    background-image: url(../images/ex/light.svg);
+}
+.light.active{
+    background-image: url(../images/ex/light1.svg) !important;
 }
 .magic{
     position: relative;

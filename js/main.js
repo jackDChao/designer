@@ -19,6 +19,38 @@ dragBotItem('dragItem', res => {
     formTime(res)
 })
 
+const waterd = {
+    "item_2": [{
+        "targets": "#item_2",
+        "right": 40,
+        "bottom": -300,
+        targetType:'1',
+        dropActType:'stand',
+        "opacity": 1,
+        "startt": 0,
+        "duration":  0.01
+    },{
+        "targets": "#item_2",
+        "right": 40,
+        "bottom": 20,
+        actionType:'1',
+        targetType:'1',
+        "opacity": 1,
+        "startt": 1,
+        "duration":  2
+    }],
+    "item_1": [{
+        "targets": "#item_1",
+        "left": 60,
+        targetType:'2',
+        "top": 40,
+        "opacity": 1,
+        "startt": 0.01,
+        "duration":  0.01
+    }]
+}
+
+// initTimerule()
 
 // 左侧导航选择
 $(document).on('click', '.leftMain div', (e) => {
@@ -209,6 +241,7 @@ $(document).on('click', '.savelesson', (e) => {
 
 getlessonbyid()
 
+
 function getlessonbyid(){
     let lessonid = getQueryString('lessonid')
     let courseid = getQueryString('courseid')
@@ -216,6 +249,41 @@ function getlessonbyid(){
         console.log(result)
         if(result){
             let html = ''
+            let defaultobj = {
+                item_1:{
+                    imgurl:''
+                },
+                item_2:{
+                    imgurl:''
+                }
+            }
+            if(!result.data){
+                html += `<div class="moveItem" data-name="课程标题" data-type="3"
+                style="left: 60px; top: 40px; position: absolute; cursor: move; width: 200px; height: 40px;opacity: 0;"
+                id="item_1" data-startt="1"><span class="texti">课程标题</span>
+                <div class="buttons">
+                    <span class="magic"></span>
+                    <span class="change"></span>
+                </div>
+                </div><div class="moveItem"
+                style="right: 40px; bottom: -300px; position: absolute; cursor: move; width: 180px; height: 200px;opacity: 0.7;"
+                data-name="scene5.svg" data-type="2" id="item_2" data-startt="0">
+                <canvas id="demoCanvas">
+
+                </canvas>
+                <div class="buttons">
+                  <span class="magic"></span>
+                  <span class="change"></span>
+                </div>
+              </div>`
+                console.log(html)
+                $('#stageBg').html(html)
+                mainStage.animation.animationObj = defaultobj
+                mainStage.animation.animationAction = waterd
+                mainStage.animation.initAnimate(waterd)
+                mainStage.addtotl(waterd)
+                return 
+            }
             let animation = JSON.parse(result.data)
             console.log(animation)
             if(animation.animationObj){
