@@ -97,6 +97,28 @@ function dragBotItem(el,cb) {
         })
     })
 }
+// var $box = $('.moveItem').mousedown(function(e) {
+//     console.log(e)
+//     var offset = $(this).offset();
+//     this.posix = {'x': e.pageX - offset.left, 'y': e.pageY - offset.top};
+//     $.extend(document, {'move': true, 'move_target': this});
+// }).on('mousedown', '.coor', function(e) {
+//     console.log($box)
+//     var posix = {
+//             'w': $box.width(), 
+//             'h': $box.height(), 
+//             'x': e.pageX, 
+//             'y': e.pageY
+//         };
+    
+//     $.extend(document, {'move': true, 'call_down': function(e) {
+//         $box.css({
+//             'width': Math.max(30, e.pageX - posix.x + posix.w),
+//             'height': Math.max(30, e.pageY - posix.y + posix.h)
+//         });
+//     }});
+//     return false;
+// })
 /**
  * 拖拽舞台元素 生成动效
  * @param
@@ -111,12 +133,55 @@ function dragStageItem(el,cb) {
     var clientH = document.body.clientHeight;
     var nowid = '',nleft = 0,ntop=0;
     console.log(offeox,offeoy)
+
+
     $(document).on('mousedown', "." + el, (e) => {
-    // $("." + el).mousedown(function (e) {\
-        
         var e = e || window.event;
-        console.log(e.target, e.currentTarget)
         if(e.target != e.currentTarget){
+            // var $box = $(e.currentTarget)
+            // if($(e.target).hasClass('coor')){
+                // $box.on('mousedown', '.coor', function(et) {
+                //     console.log(et)
+                //     var flag = true
+                //     var posix = {
+                //         'w': $box.width(), 
+                //         'h': $box.height(), 
+                //         'x': et.pageX, 
+                //         'y': et.pageY
+                //     };
+                //     let callback1 = (e)=>{
+                //         if(flag){
+                //             $box.css({
+                //                 'width': Math.max(30, e.pageX - posix.x + posix.w),
+                //                 'height': Math.max(30, e.pageY - posix.y + posix.h)
+                //             });
+                //         }
+                //     }
+                //     document.addEventListener('mousemove',callback1)
+                //     $(document).on('mouseup', '.coor', function(et) {
+                //         let nid = $($box).attr('id')
+                //         let res = {
+                //             targets: "#" + nid,
+                //             width:$box.css('width'),
+                //             height:$box.css('height'),
+                //         }
+                //         if(that.nowActOpen.id == $(that.nowElement).attr('id') && that.nowActOpen.isOpen){
+                //             that.noActionSet = res
+                //             let startt = that.timelineD.getTime() < 0.02 ? 0.02 : that.timelineD.getTime()
+                //             if(!that.checkCanInAct(startt,$(that.nowElement).attr('id'),that.animation.animationAction)){
+                //                 layer.msg('当前角色已经有一个动效了')
+                //                 return
+                //             }
+                //             that.noActionSet.startt = startt
+                //             $(".acttimeDiv").show()
+                //         }else{
+                //             that.animation.updateaction(nid,res)
+                //         }
+                //         flag = false
+                //         return false
+                //     })
+                // })
+            // }
             return
         }
         let that = e.currentTarget
@@ -155,7 +220,6 @@ function dragStageItem(el,cb) {
             }
             dv.style.left = left + "px";
             dv.style.top = top + "px";
-            
         }
         document.addEventListener('mousemove',callback)
 

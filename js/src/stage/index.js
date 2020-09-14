@@ -743,18 +743,66 @@ class stage{
             if($(parent).hasClass('moveItem') && showArr.some(ele=> $(ele).attr('id') === $(parent).attr('id'))){
                 $(parent).addClass('activeM')
                 $(parent).find('.buttons').remove()
+                $(parent).find('.coor').remove()
                 // <span class="magic"><b class="topNum">1</b></span>
                 let buttonHtml = `<div class="buttons">
                     <span class="light ${ activeLight ? 'active' : ''}"></span>
                     <span class="magic"> ${ !flag ? '<b class="topNum">1</b>' : ''} </span>
                     <span class="change"></span>
-                </div>`
+                </div><div class="coor"></div>
+                `
                 $(parent).append(buttonHtml)
             }
         })
+        $(document).on('mousedown', '.coor', function(et) {
+            var $box = $(et.currentTarget).parent()
+            var flag = true
+            var posix = {
+                'w': $box.width(), 
+                'h': $box.height(), 
+                'x': et.pageX, 
+                'y': et.pageY
+            };
+            let callback1 = (e)=>{
+                if(flag){
+                    $box.css({
+                        'width': Math.max(30, e.pageX - posix.x + posix.w),
+                        'height': Math.max(30, e.pageY - posix.y + posix.h)
+                    });
+                }
+            }
+            document.addEventListener('mousemove',callback1)
 
-       
-
+            console.log(et.currentTarget)
+            $(document).on('mouseup', et.currentTarget, function(et) {
+                if(flag){
+                    let nid = $($box).attr('id')
+                    let res = {
+                        targets: "#" + nid,
+                        width:$box.css('width'),
+                        height:$box.css('height'),
+                    }
+                    console.log(that.nowActOpen.id,nid)
+                    if(that.nowActOpen.id == nid && that.nowActOpen.isOpen){
+                        that.noActionSet = res
+                        let startt = that.timelineD.getTime() < 0.02 ? 0.02 : that.timelineD.getTime()
+                        if(!that.checkCanInAct(startt,$(that.nowElement).attr('id'),that.animation.animationAction)){
+                            layer.msg('当前角色已经有一个动效了')
+                            flag = false
+                            return
+                        }
+                        that.noActionSet.startt = startt
+                        $(".acttimeDiv").show()
+                    }else{
+                        that.animation.updateaction(nid,res)
+                    }
+                    flag = false
+                }
+                return false
+            })
+            // document.addEventListener('mouseup',callback2)
+        })
+     
         $(document).on('click', '.saveActTime', (e)=>  {
             console.log(this.noActionSet,$(".saveActTime").parent().find('.timeset').val())
             this.noActionSet.duration = Number($(".saveActTime").parent().find('.timeset').val())
